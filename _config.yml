@@ -2,8 +2,8 @@ title: "Atölye Defteri"
 description: "Karıncalar, hayvanlar ve endüstriyel yazılım üzerine kişisel bir günlük."
 author: "Yiğit Çetinkaya"
 email: yigitcetnkaya2@gmail.com
-baseurl: ""
-url: ""
+baseurl: "/atolye-defteri"
+url: "https://crowe-a.github.io"
 
 theme: minima
 minima:
