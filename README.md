@@ -1,79 +1,59 @@
 # Atölye Defteri
 
-Karıncalar, hayvanlar ve endüstriyel yazılım üzerine kişisel günlük. Jekyll ile
-statik olarak üretilir, GitHub Pages üzerinde barınır. Sadece bu repoya push
-yetkisi olan (yani siz) içerik ekleyebilir; site herkese açık okunur.
+Karıncalar, hayvanlar ve endüstriyel yazılım üzerine kişisel günlük. Veritabanı
+yok: her yazı `content/posts/` altında düz bir `.json` dosyası olarak durur.
+Yerel bir yönetim panelinden yazı/görsel eklersiniz; panel bu kayıtlardan özel
+tasarımlı statik bir HTML/CSS sitesi üretip GitHub'a gönderir. Site GitHub
+Pages üzerinde herkese açık olarak yayınlanır; içerik ekleme yetkisi sadece bu
+bilgisayara erişimi olan kişide (siz) kalır.
 
-## GitHub'a yükleme ve yayınlama
-
-1. GitHub'da yeni, **public** bir repo oluşturun (örn. `atolye-defteri`).
-2. Bu klasörde:
-
-   ```bash
-   git init
-   git add .
-   git commit -m "İlk kurulum"
-   git branch -M main
-   git remote add origin https://github.com/KULLANICI_ADIN/atolye-defteri.git
-   git push -u origin main
-   ```
-
-3. GitHub'da repo → **Settings → Pages** → "Build and deployment" altında
-   Source olarak **Deploy from a branch**, branch olarak **main / (root)**
-   seçin ve kaydedin. Birkaç dakika içinde site
-   `https://KULLANICI_ADIN.github.io/atolye-defteri/` adresinde yayında olur.
-4. `_config.yml` içindeki `url` alanına
-   `https://KULLANICI_ADIN.github.io` yazın, `baseurl` alanına da
-   `/atolye-defteri` yazın (repo adınız farklıysa ona göre güncelleyin).
-   Bunu değiştirdikten sonra tekrar commit + push yapmanız yeterli.
-
-## Yeni yazı ekleme
-
-`_posts/` klasörüne `YIL-AY-GUN-baslik.md` adında bir dosya ekleyin, örnek:
+## Nasıl çalışır
 
 ```
-_posts/2026-08-27-yeni-gozlem.md
+content/posts/*.json   → yazı kayıtları (düz metin, elle de okunabilir)
+content/images/        → yüklenen görsellerin orijinalleri
+content/about.txt      → "Hakkımda" sayfası metni
+theme/style.css        → sitenin tasarımı (istediğiniz gibi düzenleyin)
+build.py                → content/ 'dan docs/ klasörüne statik siteyi üretir
+docs/                    → GitHub Pages'in yayınladığı, üretilmiş statik site
+admin/server.py          → yerel yönetim paneli (yazı ekle/düzenle/sil, yayınla)
 ```
 
-İçeriği şu şablonla başlatın:
-
-```markdown
----
-layout: post
-title: "Yazının başlığı"
-date: 2026-08-27 09:00:00 +0300
-categories: hayvanlar   # veya: muhendislik
----
-
-Metin buraya.
-
-![Alt metin](/assets/images/DOSYA_ADI.jpg)
-*Görselin altına çıkan açıklama metni (italik).*
-```
-
-- Görseli metnin **üstüne** koymak için resmi paragraftan önce, **altına**
-  koymak için paragraftan sonra yazın.
-- `categories` alanı `hayvanlar` ya da `muhendislik` olmalı; menüdeki
-  ilgili sayfada otomatik listelenir.
-- Görsel dosyalarını `assets/images/` klasörüne koyun, dosya adını
-  markdown'daki yol ile eşleştirin.
-
-Değişikliği `git add . && git commit -m "..." && git push` ile
-gönderdiğinizde, GitHub Pages siteyi otomatik yeniden derler (1-2 dakika sürer).
-
-## Yerelde önizleme (opsiyonel)
-
-Ruby kuruluysa:
+## Yönetim panelini çalıştırma
 
 ```bash
-bundle install
-bundle exec jekyll serve
+python admin/server.py
 ```
 
-`http://localhost:4000` adresinden önizleyebilirsiniz.
+Tarayıcıda otomatik olarak `http://127.0.0.1:8000` açılır. Bu sunucu sadece
+kendi bilgisayarınızda (localhost) çalışır, dışarıdan erişilemez.
 
-## Örnek yazılar
+Panelden yapabilecekleriniz:
 
-`_posts/` klasöründeki iki örnek yazıyı (`ORNEK-karinca.jpg`,
-`ORNEK-panel.jpg` referansları) kendi görsel ve metinlerinizle
-değiştirin veya silin.
+- **Yeni yazı**: başlık, kategori (Karıncalar & Hayvanlar / Endüstriyel
+  Yazılım), tarih ve metin girin.
+- **Görsel ekleme**: "Görsel Ekle" ile bir dosya seçip "Görseli Yükle ve
+  İmlece Ekle" butonuna basın; imlecin bulunduğu yere
+  `[gorsel:dosya.jpg|açıklama]` işareti eklenir. Bu işareti metnin öncesine
+  yazarsanız görsel yazının üstünde, sonrasına yazarsanız altında görünür.
+  Açıklama kısmını doğrudan düzenleyebilirsiniz.
+- **Düzenle / Sil**: yazı listesinden.
+- **Önizlemeyi Aç**: siteyi yayınlamadan önce yerel önizleme.
+- **GitHub'a Gönder**: siteyi yeniden üretir, `git add/commit/push` yapıp
+  canlı siteyi günceller.
+
+## İlk kurulumda GitHub Pages ayarı
+
+Bu depo artık statik dosyaları kökte değil `docs/` klasöründe üretiyor.
+GitHub'da **Settings → Pages** kısmına gidip "Deploy from a branch" altında
+branch olarak **main**, klasör olarak **/docs** seçip kaydedin. Kaydettikten
+birkaç dakika sonra site şu adreste olur:
+
+**https://crowe-a.github.io/atolye-defteri/**
+
+## Yerelde site kodunu elle değiştirmek isterseniz
+
+`theme/style.css` dosyasını düzenleyip panelden "Önizlemeyi Güncelle" veya
+"GitHub'a Gönder" ile yeniden üretebilirsiniz. Sayfa yapısını (menü, sayfa
+şablonları) değiştirmek isterseniz `build.py` içindeki `base_layout` ve ilgili
+fonksiyonlara bakın.
