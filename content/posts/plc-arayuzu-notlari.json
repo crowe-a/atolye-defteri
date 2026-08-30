@@ -1,6 +1,0 @@
-{
-  "title": "PLC arayüzü üzerine notlar",
-  "category": "muhendislik",
-  "date": "2026-08-26",
-  "body": "Üzerinde çalıştığım bir hat kontrol panelinde gecikme kaynaklı bir senkronizasyon sorunu vardı; kök nedeni polling aralığıydı.\n\nBu da örnek bir yazı — silip kendi notlarınızı ekleyebilirsiniz."
-}

@@ -1,0 +1,6 @@
+{
+  "title": "V20 MODBUS RTU",
+  "category": "muhendislik",
+  "date": "2026-08-30",
+  "body": "1-v20 için 40100 parametresini kullanarak start stop ileri geri dönüş emirleri verilebilir.\r\nAyrıca, MODBUS kontrol ,klemens kontrol gibi seçenekler mevcut.\r\n2-Bir döngüde  okuma diğer döngüde de yazma işlemleri gerçekleştiriliyor. Her döngüde  de sürücüler tek tek ya okunup ya yazılıyor. Bu şekilde bütün işlemleri birkaç döngüde(ürün trafiğine bağlı) tamamlayabiliyoruz.\r\n\r\nAraştırılacak olan.\r\nFrekans kontrolunun PLC yada hesap işlemi yapan kontrolcü kullanmadan(?) yada basit hesap yapan kontrolcü kullanarak sürücüler istenilen frekanslarda çalıştırılabilir mi?(amaç bir motorun konveyör hızını sabit frekansta değil, feed-back ile belirli bir referans değere göre yükseltip alçaltması bekleniyor."
+}
