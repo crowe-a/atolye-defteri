@@ -20,6 +20,7 @@ DOCS_DIR = BASE_DIR / "docs"
 THEME_DIR = BASE_DIR / "theme"
 
 CATEGORIES = {
+    "agaclar":"Su kenarı Agacları",
     "hayvanlar": "Karıncalar & Hayvanlar",
     "muhendislik": "Endüstriyel Yazılım",
 }
